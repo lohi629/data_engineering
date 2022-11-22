@@ -19,7 +19,7 @@ void median(int a[],int n){
     printf("median is %d\n",med);
     
 }
-void mode(int a[],int n){
+void modef(int a[],int n){
     
     int c,mo,count[100],k=0;
     for(int i=0;i<n;i++){
@@ -27,22 +27,40 @@ void mode(int a[],int n){
         for(int j=i+1;j<n;j++){
             if(a[i]==a[j]){
                 c=c+1;
-               
             }
         }
-        
         count[i]=c;
     }
-    int max=count[0],max_index;
+    int max=count[0],max_index,m_c=0,mode[100],flag=0;
    for(int i=0;i<n;i++){
         if(count[i]>max){
             max=count[i];
-            max_index=i;
-            
+            m_c=m_c+1;
         }
    }
-   printf("count is %d\n",max);
-   printf("mode is :%d\n",a[max_index]);
+   for(int i=0;i<n;i=i+count[i]){
+       if( count[i]==max){
+           mode[k]=a[i];
+           k=k+1;
+       }
+   }
+       
+       
+       for(int i=0;i<k;i++){
+           printf("%d\n",mode[i]);
+       }
+switch(k){
+    case 0:printf("no mode");
+    break;
+    case 1:printf("uni modal");
+    break;
+    case 2:printf("bi modal");
+    break;
+    case 3:printf("tri modal");
+    break;
+    default:printf("multi modal");
+    break;
+}
 
     
 }
@@ -74,14 +92,13 @@ void main(){
     for(i=0;i<n;i++){
         scanf("%d",&a[i]);
     }
-    //mean_fun(a,n);
-    //median(a,n);
-    mode(a,n);
-    range(a,n);
+    mean_fun(a,n);
+    median(a,n);
+    modef(a,n);
+   range(a,n);
     quartile(a,n);
     summary(a,n);
 }
-
 
 o/p:
 
@@ -89,9 +106,8 @@ enter array size:25
 enter elements:13 15 16 16 19 20 20 21 22 22 25 25 25 25 30 33 33 35 35 35 36 40 45 52 70
 mean is: 29
 median is 25
-count is 4
-mode is :25
-mid range is:41.500000
+25
+uni modalmid range is:41.500000
  first quartile is 20
 third quartile is 35
 summary is:min ele is 13
